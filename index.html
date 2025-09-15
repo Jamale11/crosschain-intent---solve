@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cross-Chain Intent Solver</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .card {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 16px;
+      width: 320px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+    .card h1 {
+      font-size: 20px;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      font-size: 14px;
+    }
+    input, select {
+      background: #334155;
+      color: white;
+    }
+    button {
+      background: #3b82f6;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #2563eb;
+    }
+    .result {
+      margin-top: 12px;
+      padding: 10px;
+      background: #334155;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Cross-Chain Intent Solver</h1>
+    <input type="text" id="amount" placeholder="Amount">
+    
+    <select id="token">
+      <option value="ETH">ETH</option>
+      <option value="USDC">USDC</option>
+      <option value="DAI">DAI</option>
+    </select>
+    
+    <select id="fromChain">
+      <option value="Ethereum">Ethereum</option>
+      <option value="Polygon">Polygon</option>
+      <option value="Arbitrum">Arbitrum</option>
+    </select>
+    
+    <select id="toChain">
+      <option value="Polygon">Polygon</option>
+      <option value="Ethereum">Ethereum</option>
+      <option value="Optimism">Optimism</option>
+    </select>
+    
+    <button onclick="solveIntent()">Solve Intent</button>
+    
+    <div class="result" id="result" style="display:none;"></div>
+  </div>
+
+  <script>
+    function solveIntent() {
+      const amount = document.getElementById("amount").value;
+      const token = document.getElementById("token").value;
+      const fromChain = document.getElementById("fromChain").value;
+      const toChain = document.getElementById("toChain").value;
+
+      if (!amount) {
+        alert("Masukkan jumlah terlebih dahulu!");
+        return;
+      }
+
+      // Dummy kalkulasi (simulasi intent solver)
+      const output = (parseFloat(amount) * 0.99).toFixed(2); // slippage 1%
+      const gas = "0.002 ETH";
+      const route = `${fromChain} → ${toChain} via BridgeX + DEXY`;
+
+      document.getElementById("result").style.display = "block";
+      document.getElementById("result").innerHTML = `
+        <p><b>Best Route:</b> ${route}</p>
+        <p><b>Expected Output:</b> ${output} ${token}</p>
+        <p><b>Gas Cost:</b> ${gas}</p>
+      `;
+    }
+  </script>
+</body>
+</html>
